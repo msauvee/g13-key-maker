@@ -1,0 +1,13 @@
+/* css */
+
+div.skill {
+    display: table-cell;
+    min-height: 4em;
+    vertical-align: middle
+}
+
+img.skill {
+    display: block;
+    margin-left: auto;
+    margin-right: auto };
+     
