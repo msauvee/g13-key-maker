@@ -1,43 +1,43 @@
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-6">
-        <div>
-          <div class="dropdown">
-              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  Classe
-                  <span class="caret"><span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <li ng-repeat="clazz in classJobs"><a ng-click="classSelected(clazz)" href="#">{{clazz}}</a></li>
-              </ul>
-          </div>
-        </div>
-        <h3>Skills</h3>
-        <div class="row">
-          <div ng-repeat="skill in skills" class="col-sm-1 skill {{ skill.view.class }}" ng-click="addToSelectedSkills(skill.name)"> 
-            <img ng-src="{{ skill.view.icon }}" class="skill">
-          </div>
-        </div>
-        <h3>Rotation</h3>
-        <div class="row">
-          <div ng-repeat="skill in select track by $index" class="col-sm-1 skill" ng-click="removeFromSectedSkills(skill.name)"> 
-            <img ng-src="{{ skill.view.icon }}" class="skill">
-          </div>
-        </div>
-        <h3>Macro</h3>
-        <div class="row">
-          <div ng-repeat="command in commands" class="col-sm-4 skill" > 
-            {{command.trigger_time}} : {{command.skill.name_fr}}
-          </div>        
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6">
+      <div>
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                {{selectedClass}}
+                <span class="caret"><span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li ng-repeat="clazz in classJobs"><a ng-click="classSelected(clazz)">{{clazz}}</a></li>
+            </ul>
         </div>
       </div>
-      <div class="col-sm-1">
-      </div>
-      <div class="col-sm-5">
-        <div class="row">
-          <pre>{{macro}}</pre>
+      <h3>Skills</h3>
+      <div class="row">
+        <div ng-repeat="skill in skills" class="col-sm-1 skill {{ skill.view.class }}" ng-click="addToSelectedSkills(skill.name)"> 
+          <img ng-src="{{ skill.view.icon }}" class="skill">
         </div>
+      </div>
+      <h3>Rotation</h3>
+      <div class="row">
+        <div ng-repeat="skill in select track by $index" class="col-sm-1 skill" ng-click="removeFromSectedSkills(skill.name)"> 
+          <img ng-src="{{ skill.view.icon }}" class="skill">
+        </div>
+      </div>
+      <h3>Macro</h3>
+      <div class="row">
+        <div ng-repeat="command in commands" class="col-sm-4 skill" > 
+          {{command.trigger_time}} : {{command.skill.name_fr}}
+        </div>        
+      </div>
+    </div>
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-5">
+      <div class="row">
+        <pre>{{macro}}</pre>
       </div>
     </div>
   </div>
+</div>
 

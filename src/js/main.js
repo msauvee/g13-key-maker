@@ -7,34 +7,27 @@
   require('angular-animate');
   var mainCtrl = require('./controllers/mainctrl');
   var testCtrl = require('./controllers/testctrl');
-  //var ffxivdb = require('./services/xivdb');
-  //var g13Service = require('./services/g13');
+  var ffxivdb = require('./services/xivdb');
+  var g13 = require('./services/g13');
   
   var app = angular.module('g13KeyMaker', ['ngRoute', 'ngAnimate']);
 
-  app.config([
-    '$locationProvider',
-    '$routeProvider',
-    function($locationProvider, $routeProvider) {
-      $locationProvider.hashPrefix('!');
+  app.config(function($routeProvider) {
       // routes
       $routeProvider
-        .when("/", {
-          templateUrl: "./partials/partial1.html",
-          controller: "MainController"
-        })
-        .when("/test/", {
-          templateUrl: "./partials/test.html",
-          controller: "TestController"
+        .when('/', {
+          templateUrl: './partials/partial1.html',
+          controller: 'mainController'
         })
         .otherwise({
            redirectTo: '/'
         });
-    }
-  ]);
+  });
+
+  app.service('ffxivdb', ['$http', ffxivdb]);
+  app.service('g13', ['$http', g13]);
 
   //Load controller
-  app.controller('MainController', ['$scope', '$http', '$log', mainCtrl]);
-  app.controller('TestController', ['$scope', '$http', '$log', testCtrl]);
+  app.controller('mainController', ['$scope', '$http', '$log', 'ffxivdb', 'g13', mainCtrl]);
 
 }());
