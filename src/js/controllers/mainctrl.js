@@ -1,32 +1,38 @@
 module.exports = function($scope, $http, $log, ffxivdb, g13) {
+    var noClassSelectionLabel = 'Class';
+    var noJobSelectionLabel = 'Job';
 
     function updateSkill() {
-        if ($scope.selectedClass) {
-            var skills = ffxivdb.skillList($scope.selectedClass);
-            // add view object inside model
-            // url: "http://xivdb.com/images/icons/000000/000606.png",
-            angular.forEach(skills, function(skill) {
-                if (skill) {
-                    skill.view = {};
-                    skill.view.icon = 'http://xivdb.com' + skill.icon;
-                    skill.view.class = (skill.key) ? 'enabled' : 'disabled';
-                }
-            });
-
-            angular.forEach(g13.mappings, function(mapping) {
-                for(var index = 0; index < skills.length; index++) {
-                    if (skills[index] && skills[index].id === mapping.id) {
-                        skills[index].key = mapping.key;
-                        break;
-                    }
-                }
-            });
-
-            $scope.skills = skills;
-            var commands = g13.computeCommands($scope.select);
-            $scope.commands = commands;
-            $scope.macro = g13.computeMacro(commands);
+        var skills = [];
+        if ($scope.selectedJob && $scope.selectedJob != noJobSelectionLabel) {
+            skills = ffxivdb.skillListOfJob($scope.selectedJob);
         }
+        else if ($scope.selectedClass && $scope.selectedClass != noClassSelectionLabel) {
+            skills = ffxivdb.skillListOfClass($scope.selectedClass);
+        }
+        // add view object inside model
+        // url: "http://xivdb.com/images/icons/000000/000606.png",
+        angular.forEach(skills, function(skill) {
+            if (skill) {
+                skill.view = {};
+                skill.view.icon = 'http://xivdb.com' + skill.icon;
+                skill.view.class = (skill.key) ? 'enabled' : 'disabled';
+            }
+        });
+
+        angular.forEach(g13.mappings, function(mapping) {
+            for(var index = 0; index < skills.length; index++) {
+                if (skills[index] && skills[index].id === mapping.id) {
+                    skills[index].key = mapping.key;
+                    break;
+                }
+            }
+        });
+
+        $scope.skills = skills;
+        var commands = g13.computeCommands($scope.select);
+        $scope.commands = commands;
+        $scope.macro = g13.computeMacro(commands);
     }
 
     $scope.addToSelectedSkills = function(skill_name) {
@@ -57,6 +63,13 @@ module.exports = function($scope, $http, $log, ffxivdb, g13) {
 
     $scope.classSelected = function(clazz) {
         $scope.selectedClass = clazz;
+        $scope.selectedJob = 'Job';
+        updateSkill();
+    };
+
+    $scope.jobSelected = function(job) {
+        $scope.selectedClass = ffxivdb.classOfJob(job);
+        $scope.selectedJob = job;
         updateSkill();
     };
 
@@ -65,6 +78,8 @@ module.exports = function($scope, $http, $log, ffxivdb, g13) {
     $scope.select = [];   
     $scope.commands = [];
     $scope.macro ='';
-    $scope.selectedClass = 'Classe';
-    $scope.classJobs = ffxivdb.classFullList();   
+    $scope.selectedClass = noClassSelectionLabel;
+    $scope.selectedJob = noJobSelectionLabel;
+    $scope.classList = ffxivdb.classList;   
+    $scope.jobList = ffxivdb.jobList;   
 };

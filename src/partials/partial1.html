@@ -1,20 +1,31 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-6">
-      <div>
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                {{selectedClass}}
-                <span class="caret"><span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li ng-repeat="clazz in classJobs"><a ng-click="classSelected(clazz)">{{clazz}}</a></li>
-            </ul>
+    <div class="col-sm-4">
+      <div class="row">
+        <div class="btn-group btn-group-justified" role="jobs">
+          <div class="btn-group" role"jobs">
+              <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  {{selectedClass}}
+                  <span class="caret"><span>
+              </a>
+              <ul class="dropdown-menu">
+                  <li ng-repeat="clazz in classList"><a ng-click="classSelected(clazz)">{{clazz}}</a></li>
+              </ul>
+          </div>
+          <div class="btn-group" role"jobs">
+              <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  {{selectedJob}}
+                  <span class="caret"><span>
+              </a>
+              <ul class="dropdown-menu">
+                  <li ng-repeat="job in jobList"><a ng-click="jobSelected(job)">{{job}}</a></li>
+              </ul>
+          </div>
         </div>
       </div>
       <h3>Skills</h3>
       <div class="row">
-        <div ng-repeat="skill in skills" class="col-sm-1 skill {{ skill.view.class }}" ng-click="addToSelectedSkills(skill.name)"> 
+        <div ng-repeat="skill in skills" class="col-sm-2 skill {{ skill.view.class }}" ng-click="addToSelectedSkills(skill.name)"> 
           <img ng-src="{{ skill.view.icon }}" class="skill">
         </div>
       </div>

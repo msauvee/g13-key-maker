@@ -6,7 +6,6 @@
   require('angular-route');
   require('angular-animate');
   var mainCtrl = require('./controllers/mainctrl');
-  var testCtrl = require('./controllers/testctrl');
   var ffxivdb = require('./services/xivdb');
   var g13 = require('./services/g13');
   
