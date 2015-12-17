@@ -21,15 +21,18 @@ module.exports = function($http) {
             if (clazzOrJob === 'arcanist') {
                 return 26;
             }
+            if (clazzOrJob === 'rogue') {
+                return 29;
+            }
             return clazzIndex + 1;
         }
         var jobIndex = ffxivdb.jobList.indexOf(clazzOrJob);
         if (jobIndex !== -1) {
-            if (clazzOrJob === 'summoner') {
-                return 27;
+            if (jobIndex >= 7) { // summoner, cholar
+                return jobIndex + 20;
             }
-            if (clazzOrJob === 'scholar') {
-                return 28;
+            if (jobIndex >= 9) { // 'ninja', 'machinist', 'darkknight', 'astrologian' 
+                return jobIndex + 21;
             }
             return jobIndex + 19;
         }
