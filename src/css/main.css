@@ -9,5 +9,10 @@ div.skill {
 img.skill {
     display: block;
     margin-left: auto;
-    margin-right: auto };
-     
+    margin-right: auto 
+}
+    
+
+button.btn.btn-large.skill {
+    padding: 1px;
+}

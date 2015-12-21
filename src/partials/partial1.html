@@ -26,18 +26,20 @@
       <h3>Skills</h3>
       <div class="row">
         <div ng-repeat="skill in skills" class="col-sm-2 skill {{ skill.view.class }}" ng-click="addToSelectedSkills(skill.name)"> 
-          <img ng-src="{{ skill.view.icon }}" class="skill">
+          <button class="btn btn-large skill" type="button" ng-disabled="skill.key == undefined" data-toggle="tooltip">
+            <img ng-src="{{ skill.view.icon }}" class="skill img-rounded">
+          </button>
         </div>
       </div>
       <h3>Rotation</h3>
       <div class="row">
-        <div ng-repeat="skill in select track by $index" class="col-sm-1 skill" ng-click="removeFromSectedSkills(skill.name)"> 
+        <div ng-repeat="skill in select track by $index" class="col-sm-2 skill" ng-click="removeFromSectedSkills(skill.name)" tooltip="{{skill.name_fr}}"> 
           <img ng-src="{{ skill.view.icon }}" class="skill">
         </div>
       </div>
       <h3>Macro</h3>
       <div class="row">
-        <div ng-repeat="command in commands" class="col-sm-4 skill" > 
+        <div ng-repeat="command in commands" class="col-sm-12 skill" > 
           {{command.trigger_time}} : {{command.skill.name_fr}}
         </div>        
       </div>
